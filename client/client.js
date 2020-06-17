@@ -3,6 +3,8 @@ const form = document.querySelector('form');
 const loading = document.querySelector('.loading'); 
 loading.style.display = 'none';
 
+const API_URL = 'http://localhost:5000/woofs';
+
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     
@@ -17,5 +19,13 @@ form.addEventListener('submit', (e) => {
 
     form.style.display = 'none';
     loading.style.display = '';
-    console.log(woof);
+
+    fetch(API_URL, {
+        method: 'POST',
+        body: JSON.stringify(woof),
+        headers: {
+            'content-type': 'application/JSON'
+        }
+    })
 });
+
