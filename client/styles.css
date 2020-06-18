@@ -3,7 +3,7 @@
 }
 
 .woof-form, .loading {
-
+    align-items: center;
     width: 50%;
     margin: 0 auto;
 }
@@ -11,6 +11,7 @@
 label {
     text-align: center;
 }
+
 
 .loading {
     text-align: center;

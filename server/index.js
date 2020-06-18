@@ -2,7 +2,12 @@ const express = require('express');
 
 const cors = require('cors');
 
+const monk = require('monk');
+
 const app = express();
+
+const db = monk('localhost/woofer');
+const woofs = db.get('woofs');
 
 app.use(cors());
 app.use(express.json());
@@ -22,10 +27,16 @@ app.post('/woofs', (req, res) => {
     if(isValidWoof(req.body)){
         const woof = {
             name: req.body.name.toString(),
-            message: req.body.message.toString()
+            message: req.body.message.toString(),
+            created: new Date()
         };
 
         console.log(woof);
+        woofs
+            .insert(woof)
+            .then(newWoof => {
+                res.json(newWoof);
+            });
     } else {
         res.status(402);
         res.json({
@@ -33,6 +44,8 @@ app.post('/woofs', (req, res) => {
         });
     }
 });
+
+
 
 app.listen(5000, () => {
     console.log('listening on http://localhost:5000');

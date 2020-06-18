@@ -26,6 +26,9 @@ form.addEventListener('submit', (e) => {
         headers: {
             'content-type': 'application/JSON'
         }
-    })
+    }).then(response => response.json())
+    .then(newWoof => {
+        console.log(newWoof);
+    });
 });
 
