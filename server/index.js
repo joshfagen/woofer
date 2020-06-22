@@ -18,10 +18,19 @@ app.get('/', (req, res) => {
     });
 });
 
+app.get('/woofs', (req, res) => {
+    woofs
+        .find()
+        .then(woofs => {
+            res.json(woofs);
+        });
+});
+
 function isValidWoof(woof) {
     return woof.name && woof.name.toString().trim() != '' &&
     woof.message && woof.message.toString().trim() != '' 
 }
+
 
 app.post('/woofs', (req, res) => {
     if(isValidWoof(req.body)){

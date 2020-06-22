@@ -28,7 +28,9 @@ form.addEventListener('submit', (e) => {
         }
     }).then(response => response.json())
     .then(newWoof => {
-        console.log(newWoof);
+        form.reset();
+        form.style.display = '';
+        loading.style.display = 'none';
     });
 });
 
