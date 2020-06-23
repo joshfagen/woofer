@@ -32,7 +32,10 @@ form.addEventListener('submit', (e) => {
     }).then(response => response.json())
     .then(newWoof => {
         form.reset();
-        form.style.display = '';
+        setTimeout(() => {
+            form.style.display = '';
+        }, 5000);
+        
         listAllWoofs();
     });
 });

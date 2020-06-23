@@ -4,10 +4,15 @@ const cors = require('cors');
 
 const monk = require('monk');
 
+const badWords = require('bad-words');
+
+const rateLimiter = require('express-rate-limit');
+
 const app = express();
 
 const db = monk('localhost/woofer');
 const woofs = db.get('woofs');
+const filter = new badWords();
 
 app.use(cors());
 app.use(express.json());
@@ -31,12 +36,16 @@ function isValidWoof(woof) {
     woof.message && woof.message.toString().trim() != '' 
 }
 
+app.use(rateLimiter({
+    windowMs: 5 * 1000,
+    max: 1
+}));
 
 app.post('/woofs', (req, res) => {
     if(isValidWoof(req.body)){
         const woof = {
-            name: req.body.name.toString(),
-            message: req.body.message.toString(),
+            name: filter.clean(req.body.name.toString()),
+            message: filter.clean(req.body.message.toString()),
             created: new Date()
         };
 
