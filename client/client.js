@@ -49,7 +49,8 @@ function listAllWoofs() {
                 header.textContent = woof.name;
 
                 const contents = document.createElement('p');
-                contents.innerHTML = '<i>' + woof.message + '</i>';
+                contents.textContent = woof.message;
+                contents.style.fontStyle = 'italic';
 
                 div.appendChild(header);
                 div.appendChild(contents);

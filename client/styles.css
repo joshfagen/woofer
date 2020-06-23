@@ -16,3 +16,8 @@ label {
 .loading {
     text-align: center;
 }
+
+.woofs {
+    width: 80%;
+    margin: 0 auto;
+}
