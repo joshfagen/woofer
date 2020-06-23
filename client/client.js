@@ -33,27 +33,37 @@ form.addEventListener('submit', (e) => {
     .then(newWoof => {
         form.reset();
         form.style.display = '';
-        loading.style.display = 'none';
+        listAllWoofs();
     });
 });
 
 function listAllWoofs() {
+    woofsElement.innerHTML = '';
+    
     fetch(API_URL)
         .then(response => response.json())
         .then(woofs => {
-            console.log(woofs);
+            woofs.reverse();
             woofs.forEach(woof => {
                 const div = document.createElement('div');
                 
                 const header = document.createElement('h3');
                 header.textContent = woof.name;
+                header.style.fontStyle = 'italic';
+                header.style.fontWeight = 'bold';
 
                 const contents = document.createElement('p');
                 contents.textContent = woof.message;
-                contents.style.fontStyle = 'italic';
 
+                const date = document.createElement('small');
+                woofDate = new Date(woof.created);
+                date.textContent = woofDate.toDateString();
+
+                
                 div.appendChild(header);
+                div.appendChild(date);
                 div.appendChild(contents);
+                
 
                 woofsElement.appendChild(div);
                 
