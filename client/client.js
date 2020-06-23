@@ -55,8 +55,12 @@ function listAllWoofs() {
                 div.appendChild(contents);
 
                 woofsElement.appendChild(div);
-
+                
             });
+            loading.style.display = 'none';
         });
 
-}
+        
+    }
+   
+    
