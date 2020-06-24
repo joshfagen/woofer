@@ -10,7 +10,7 @@ const rateLimiter = require('express-rate-limit');
 
 const app = express();
 
-const db = monk('localhost/woofer');
+const db = monk(process.env.MONGO_URI || 'localhost/woofer');
 const woofs = db.get('woofs');
 const filter = new badWords();
 

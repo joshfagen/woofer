@@ -7,7 +7,7 @@ const woofsElement = document.querySelector('.woofs');
 
 const API_URL = 'http://localhost:5000/woofs';
 
-listAllWoofs(); //#endregion
+listAllWoofs();
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     
